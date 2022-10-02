@@ -1,0 +1,3 @@
+web: ../web/yarn dev
+api: bin/rails s
+redis: redis-server
