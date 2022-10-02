@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { VueQueryPlugin } from "vue-query";
-import { queryClient } from "@/queries/query-client";
+import { queryClient } from "@/queries/queryClient";
 
 import App from "./App.vue";
 import router from "./router";
