@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  namespace :api, :defaults => { :format => 'json' } do
-    namespace :v1 do
+  scope :api, :defaults => { :format => 'json' } do
+    scope :v1 do
       resources :posts
       devise_for :users, controllers: { sessions: 'users/sessions' }
+      devise_scope :user do
+        # post 'users/sign_in' => 'sessions#create'
+        get 'users/current' => 'sessions#show'
+      end
     end
   end 
 end
