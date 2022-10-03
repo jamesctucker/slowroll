@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   scope :api, :defaults => { :format => 'json' } do
     scope :v1 do
       resources :posts
-      devise_for :users, controllers: { sessions: 'users/sessions' }
+      devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
       devise_scope :user do
         # post 'users/sign_in' => 'sessions#create'
-        get 'users/current' => 'sessions#show'
+        get 'users/current' => 'users/sessions#show'
+        # sign up
+        post 'users/signup' => 'users/registrations#create'
       end
     end
   end 

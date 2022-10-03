@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { useAuth } from "@/composables/auth/useAuth";
+
 export const useAuthStore = defineStore("auth", () => {
   const { register, login, logout, getUser } = useAuth();
   const initialState = { user: getUser() };
@@ -13,6 +14,9 @@ export const useAuthStore = defineStore("auth", () => {
   const createUser = async ({ email, password } = {}) => {
     await register({ email, password }).then((response) => {
       user.value.user = response.data;
+      console.log("user.value.user", user.value.user);
+      //   TODO: if success, sign in user, else show error
+      signIn({ email, password });
     });
   };
 
