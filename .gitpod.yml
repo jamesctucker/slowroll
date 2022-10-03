@@ -1,0 +1,23 @@
+tasks:
+  - name: api
+    before: |
+      cd api
+    init: |
+      bundle install
+    command: |
+      bin/rails s
+  - name: web
+    before: |
+      cd ../web
+    init: |
+      yarn install
+    command: |
+      yarn dev
+ports:
+  - name: Web
+    description: Vue frontend
+    port: 5173
+    onOpen: open-browser
+  - name: Api
+    description: Rails server
+    port: 3000
