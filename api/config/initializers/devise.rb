@@ -310,5 +310,15 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
   config.jwt do |jwt|
     jwt.secret = Rails.application.secrets.jwt_secret
+
+    jwt.dispatch_requests = [
+      ['POST', %r{^/users/sign_in$}],
+      # on signup, we want to return the token in the response
+      # so that the user can be logged in automatically - 'api/v1/users/signup'
+      ['POST', %r{^/api/v1/users/signup$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/users/logout$}]
+    ]
   end
 end

@@ -5,20 +5,20 @@ export const useAuth = () => {
   const { http, setHTTPHeader } = useHttp();
   // register
   const register = (user) => {
-    return createUser(user);
+    return createUser(user).then((response) => {
+      if (response.headers.authorization) {
+        setToken(response);
+      }
+
+      return response;
+    });
   };
 
   // login
   const login = async (user) => {
     return loginUser(user).then((response) => {
-      console.log(response.headers);
       if (response.headers.authorization) {
-        console.log("response", response);
-
-        const token = response.headers.authorization;
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("token", token);
-        setHTTPHeader({ Authorization: token });
+        setToken(response);
       }
 
       return response;
@@ -56,5 +56,12 @@ export const useAuth = () => {
     return localStorage.getItem("token");
   };
 
-  return { register, login, logout, clearCache, getUser, getToken };
+  const setToken = (response) => {
+    const token = response.headers.authorization;
+    localStorage.setItem("user", JSON.stringify(response.data));
+    localStorage.setItem("token", token);
+    setHTTPHeader({ Authorization: token });
+  };
+
+  return { register, login, logout, clearCache, getUser, getToken, setToken };
 };

@@ -12,6 +12,7 @@
 - [Jbuilder](https://github.com/rails/jbuilder) - simple DSL for declaring JSON structures sent from the server
 - [Rspec](https://rspec.info/)
 - [Sidekiq](https://sidekiq.org/) - background job processing for Ruby
+- [Pagy](https://github.com/ddnexus/pagy) - paginating server response data
 
 ### Frontend
 

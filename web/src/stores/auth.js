@@ -12,19 +12,13 @@ export const useAuthStore = defineStore("auth", () => {
   });
 
   const createUser = async ({ email, password } = {}) => {
-    await register({ email, password });
-    // .then((response) => {
-    //   state.value.user = response.data;
-    //   //   TODO: if success, sign in user, else show error
-    //   signIn({ email, password });
-    // });
+    const response = await register({ email, password });
+    state.value.user = response.data;
   };
 
   const signIn = async ({ email, password } = {}) => {
-    await login({ email, password }).then((response) => {
-      state.value.user = response.data.user;
-    });
-
+    const response = await login({ email, password });
+    state.value.user = response.data.user;
     // return { response };
   };
   const signOut = async () => {

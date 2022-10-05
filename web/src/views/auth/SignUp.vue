@@ -1,11 +1,14 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
 const email = ref("");
 const password = ref("");
 const passwordConfirmation = ref("");
 const store = useAuthStore();
+const router = useRouter();
+const route = useRoute();
 
 const signUp = async (e) => {
   e.preventDefault();
@@ -13,6 +16,8 @@ const signUp = async (e) => {
     email: email.value,
     password: password.value,
   });
+
+  router.push(route.query.redirect || "/");
 };
 </script>
 
