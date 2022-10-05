@@ -22,7 +22,7 @@ export const useAuthStore = defineStore("auth", () => {
 
   const signIn = async ({ email, password } = {}) => {
     await login({ email, password }).then((response) => {
-      state.value.user = response.data;
+      state.value.user = response.data.user;
     });
 
     // return { response };

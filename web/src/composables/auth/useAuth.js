@@ -16,7 +16,7 @@ export const useAuth = () => {
         console.log("response", response);
 
         const token = response.headers.authorization;
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("token", token);
         setHTTPHeader({ Authorization: token });
       }
