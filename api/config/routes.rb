@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :posts
       devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
       devise_scope :user do
-        # post 'users/sign_in' => 'sessions#create'
+        post 'users/sign_in' => 'sessions#create'
         get 'users/current' => 'users/sessions#show'
         # sign up
         post 'users/signup' => 'users/registrations#create'

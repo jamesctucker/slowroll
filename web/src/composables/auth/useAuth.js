@@ -11,7 +11,10 @@ export const useAuth = () => {
   // login
   const login = async (user) => {
     return loginUser(user).then((response) => {
+      console.log(response.headers);
       if (response.headers.authorization) {
+        console.log("response", response);
+
         const token = response.headers.authorization;
         localStorage.setItem("user", JSON.stringify(response.data));
         localStorage.setItem("token", token);
